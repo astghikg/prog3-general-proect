@@ -1,3 +1,4 @@
+var Square = require("./cnox.class");
 class Gishatich {
     constructor(x, y, index) {
         this.x = x;

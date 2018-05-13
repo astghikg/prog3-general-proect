@@ -1,3 +1,4 @@
+var Square = require("./cnox.class");
 class Grass extends LivingCreature {
 
     mul() {
