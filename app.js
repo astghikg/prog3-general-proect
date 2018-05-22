@@ -1,33 +1,30 @@
 var express = require("express");
 var app = express();
-
-app.use(express.static("public"));
-
-app.get("/", function (req, res) {
-    res.redirect("public/index.html");
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+app.use(express.static("."));
+app.get('/', function (req, res) {
+    res.redirect('index.html');
 });
+server.listen(3000);
 
-app.listen(3000, function () {
-    console.log("Example is running on port 3000");
-});
 
-var xqanak = 30;
-var yqanak = 20;
-var grassArr = [];
-var GrassEaterArr = [];
-var gishatichArr = [];
-var amenakerArr = [];
-var mahArr = [];
 
-var matrix = [];
+grassArr = [];
+GrassEaterArr = [];
+gishatichArr = [];
+amenakerArr = [];
+mahArr = [];
+
+matrix = [];
 for (var y = 0; y < yqanak; y++) {
     matrix[y] = [];
     for (var x = 0; x < xqanak; x++) {
         matrix[y][x] = Math.round(Math.random() * 3);
     }
 }
-var side = 15;
 
+//amenakeri stexcum
 var amenaker = 2;
 while (amenaker > 0) {
     var x = Math.round(random(xqanak - 1));
@@ -38,6 +35,7 @@ while (amenaker > 0) {
     }
 
 }
+//mahi stexcum
 var mah = 1;
 while (mah > 0) {
     var x = Math.round(random(xqanak - 1));
@@ -48,6 +46,8 @@ while (mah > 0) {
     }
 
 }
+
+
 
 for (var y = 0; y < matrix.length; y++) {
     for (var x = 0; x < matrix[0].length; x++) {
@@ -74,25 +74,31 @@ for (var y = 0; y < matrix.length; y++) {
 
     }
 }
-console.log(grassArr);
-console.log(GrassEaterArr);
-console.log(gishatichArr);
-console.log(amenakerArr);
 
-for (var i in grassArr) {
-    grassArr[i].mul();
-}
+io.on('connection', function (socket) {
+    setInterval(func, 500);
+    function func() {
+        for (var i in grassArr) {
+            grassArr[i].mul();
+        }
+        for (var j in GrassEaterArr) {
+            GrassEaterArr[j].eat();
+        }
 
-for (var j in GrassEaterArr) {
-    GrassEaterArr[j].eat();
-}
+        for (var j in gishatichArr) {
+            gishatichArr[j].eat();
+        }
+        for (var j in amenakerArr) {
+            amenakerArr[j].move();
+        }
+        for (var j in mahArr) {
+            mahArr[j].mernel();
+        }
+        io.sockets.emit('matrix', matrix);
 
-for (var j in gishatichArr) {
-    gishatichArr[j].eat();
-}
-for (var j in amenakerArr) {
-    amenakerArr[j].move();
-}
-for (var j in mahArr) {
-    mahArr[j].mernel();
-}
+    }
+
+});
+
+
+

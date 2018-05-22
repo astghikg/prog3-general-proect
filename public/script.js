@@ -1,53 +1,42 @@
-
-
-
+var xqanak = 30;
+var yqanak = 20;
+var side = 15;
 
 function setup() {
-    frameRate(5);
-    createCanvas(matrix[0].length * side, matrix.length * side);
+    createCanvas(xqanak * side, yqanak * side);
     background('#acacac');
-
-    //matrix = [
-    //[0, 0, 1, 0, 0],
-    //[1, 0, 0, 0, 0],
-    // [0, 1, 0, 2, 0],
-    //[4, 0, 1, 0, 0],
-    //[1, 1, 2, 4, 0],
-    //[1, 1, 0, 0, 0],
-    //[1, 1, 0, 3, 0]
-    //  ];
 }
-function draw() {
 
-    for (var y = 0; y < matrix.length; y++) {
-        for (var x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x] == 1) {
+socket.on("matrix", function (data) {
+    for (i in data){
+        for (j in data) {
+            if (data[i][j] == 1) {
                 fill(0, 122, 0);
-                rect(x * side, y * side, side, side);
+                rect(i * side, j * side, side, side);
             }
-            else if (matrix[y][x] == 2) {
+            else if (data[i][j]  == 2) {
                 fill(255, 255, 0);
-                rect(x * side, y * side, side, side);
+                rect(i * side, j * side, side, side);
             }
-            else if (matrix[y][x] == 3) {
+            else if (data[i][j]  == 3) {
                 fill(255, 0, 0);
-                rect(x * side, y * side, side, side);
+                rect(i * side, j * side, side, side);
             }
-            else if (matrix[y][x] == 4) {
+            else if (data[i][j]  == 4) {
                 fill(0, 0, 255);
-                rect(x * side, y * side, side, side);
+                rect(i * side, j * side, side, side);
             }
-            else if (matrix[y][x] == 5) {
+            else if (data[i][j]  == 5) {
                 fill(255, 255, 255);
-                rect(x * side, y * side, side, side);
+                rect(i * side, j * side, side, side);
             }
             else {
                 fill('#acacac');
-                rect(x * side, y * side, side, side);
+                rect(i * side, j * side, side, side);
             }
         }
     }
-}
+});
 
 
 
