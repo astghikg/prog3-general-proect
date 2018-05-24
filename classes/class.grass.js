@@ -1,9 +1,10 @@
-var Square = require("./cnox.class");
-class Grass extends LivingCreature {
+var LivingCreature = require("./cnox.class");
+ module.exports = class Grass extends LivingCreature {
 
     mul() {
         this.multiply++;
-        var newCell = random(this.yntrelVandak(0));
+        var index = Math.floor(Math.random()*this.yntrelVandak(0));
+        var newCell = yntrelvandak[index];
         if (this.multiply >= 8 && newCell) {
             var newGrass = new Grass(newCell[0], newCell[1], this.index);
             grassArr.push(newGrass);

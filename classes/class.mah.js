@@ -1,4 +1,4 @@
-class Mah {
+module.exports = class Mah {
     constructor() {
         this.multiply = 0;
     }

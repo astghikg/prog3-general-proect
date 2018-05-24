@@ -6,7 +6,7 @@ function setup() {
     createCanvas(xqanak * side, yqanak * side);
     background('#acacac');
 }
-
+var socket = io.connect('http://localhost:3000');
 socket.on("matrix", function (data) {
     for (i in data){
         for (j in data) {

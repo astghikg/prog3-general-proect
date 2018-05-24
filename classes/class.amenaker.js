@@ -1,4 +1,4 @@
-class Amenaker {
+module.exports = class Amenaker {
     constructor(x, y, index) {
         this.x = x;
         this.y = y;
@@ -36,8 +36,8 @@ class Amenaker {
 
     move() {
 
-        var newY = Math.round(random(matrix.length - 1));
-        var newX = Math.round(random(matrix[0].length - 1));
+        var newY = Math.round(Math.random()*(matrix.length - 1));
+        var newX = Math.round(Math.random()*(matrix[0].length - 1));
 
         if (matrix[this.y][this.x] == 1) {
             for (var i in grassArr) {

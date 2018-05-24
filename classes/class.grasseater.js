@@ -1,5 +1,5 @@
-var Square = require("./cnox.class");
-class GrassEater extends LivingCreature {
+var LivingCreature = require("./cnox.class");
+ module.exports = class GrassEater extends LivingCreature {
     constructor(x, y, index) {
         super(x, y, index);
         this.tariq = 0;
@@ -25,7 +25,8 @@ class GrassEater extends LivingCreature {
 
     move() {
         var datarkVandakner = this.chooseCell(0);
-        var miVandak = random(datarkVandakner);
+        var index = Math.floor(Math.random()*datarkVandakner.length);
+        var miVandak = datarkVandakner[index];
         if (miVandak) {
             var newX = miVandak[0];
             var newY = miVandak[1];
@@ -49,7 +50,8 @@ class GrassEater extends LivingCreature {
 
     eat() {
         var vandak = this.chooseCell(1);
-        var mekvandak = random(vandak);
+        var index = Math.floor(Math.random()*vandak.length);
+        var mekvandak = vandak[index];
         if (mekvandak) {
             var newX = mekvandak[0];
             var newY = mekvandak[1];
@@ -91,7 +93,8 @@ class GrassEater extends LivingCreature {
     }
     mul() {
         var vandak = this.chooseCell(0);
-        var mekvandak = random(vandak);
+        var index = Math.floor(Math.random()*vandak.length);
+        var mekvandak = vandak[index];
         if (mekvandak && this.energy >= 12) {
             var newX = mekvandak[0];
             var newY = mekvandak[1];

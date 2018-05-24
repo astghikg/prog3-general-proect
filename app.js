@@ -2,11 +2,16 @@ var express = require("express");
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-app.use(express.static("."));
+app.use(express.static("public"));
 app.get('/', function (req, res) {
-    res.redirect('index.html');
+    res.redirect('public/index.html');
 });
 server.listen(3000);
+var Grass = require('./classes/class.grass.js');
+var GrassEater = require('./classes/class.grasseater.js');
+var Gishatich = require('./classes/class.gishatich.js');
+var Amenaker = require('./classes/class.amenaker.js');
+var Mah = require('./classes/class.mah.js');
 
 
 
@@ -15,6 +20,8 @@ GrassEaterArr = [];
 gishatichArr = [];
 amenakerArr = [];
 mahArr = [];
+var xqanak = 30;
+var yqanak = 20;
 
 matrix = [];
 for (var y = 0; y < yqanak; y++) {
@@ -27,8 +34,8 @@ for (var y = 0; y < yqanak; y++) {
 //amenakeri stexcum
 var amenaker = 2;
 while (amenaker > 0) {
-    var x = Math.round(random(xqanak - 1));
-    var y = Math.round(random(yqanak - 1));
+    var x = Math.round(Math.random()*(xqanak - 1));
+    var y = Math.round(Math.random()*(yqanak - 1));
     if (matrix[y][x] == 0) {
         matrix[y][x] = 4;
         amenaker--;
@@ -38,8 +45,8 @@ while (amenaker > 0) {
 //mahi stexcum
 var mah = 1;
 while (mah > 0) {
-    var x = Math.round(random(xqanak - 1));
-    var y = Math.round(random(yqanak - 1));
+    var x = Math.round(Math.random()*(xqanak - 1));
+    var y = Math.round(Math.random()*(yqanak - 1));
     if (matrix[y][x] == 0) {
         matrix[y][x] = 5;
         mah--;

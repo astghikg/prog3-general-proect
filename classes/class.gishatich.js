@@ -1,5 +1,5 @@
 var Square = require("./cnox.class");
-class Gishatich {
+module.exports = class Gishatich {
     constructor(x, y, index) {
         this.x = x;
         this.y = y;
@@ -59,7 +59,8 @@ class Gishatich {
 
     move() {
         var datarkVandakner = this.chooseCell(0);
-        var miVandak = random(datarkVandakner);
+        var index = Math.floor(Math.random()*datarkVandakner.length);
+        var miVandak = datarkVandakner[index];
         if (miVandak) {
             this.energy--;
 
@@ -93,7 +94,8 @@ class Gishatich {
 
     eat() {
         var vandak = this.chooseCell(2);
-        var mekvandak = random(vandak);
+        var index = Math.floor(Math.random()*vandak.length);
+        var mekvandak = vandak[index];
         if (mekvandak) {
             this.energy++;
             var newX = mekvandak[0];
@@ -122,7 +124,8 @@ class Gishatich {
     }
     mul() {
         var vandak = this.chooseCell(0);
-        var mekvandak = random(vandak);
+        var index = Math.floor(Math.random()*vandak.length);
+        var mekvandak = vandak[index];
         if (mekvandak) {
             var newX = mekvandak[0];
             var newY = mekvandak[1];
