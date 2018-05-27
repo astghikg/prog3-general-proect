@@ -1,3 +1,9 @@
+var Grass = require('./class.grass.js');
+var GrassEater = require('./class.grasseater.js');
+var Gishatich = require('./class.gishatich.js');
+var Amenaker = require('./class.amenaker.js');
+
+
 module.exports = class Mah {
     constructor() {
         this.multiply = 0;
@@ -6,11 +12,11 @@ module.exports = class Mah {
         this.multiply++;
 
         if (this.multiply >= 16) {
-            background('black');
             grassArr = [];
             GrassEaterArr = [];
             gishatichArr = [];
             amenakerArr = [];
+            spanel = true;
 
 
 
@@ -39,6 +45,7 @@ module.exports = class Mah {
                 }
             }
             this.multiply = 0;
+            spanel = false;
 
         }
 

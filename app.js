@@ -2,11 +2,12 @@ var express = require("express");
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+app.set('port', process.env.PORT || 3000);
 app.use(express.static("public"));
 app.get('/', function (req, res) {
     res.redirect('public/index.html');
 });
-server.listen(3000);
+server.listen(app.get('port'));
 var Grass = require('./classes/class.grass.js');
 var GrassEater = require('./classes/class.grasseater.js');
 var Gishatich = require('./classes/class.gishatich.js');
@@ -20,8 +21,20 @@ GrassEaterArr = [];
 gishatichArr = [];
 amenakerArr = [];
 mahArr = [];
-var xqanak = 30;
-var yqanak = 20;
+var xqanak = 40;
+var yqanak = 40;
+spanel = false;
+xotbazm = 0;
+xotakerbazm = 0;
+gishatichbazm = 0;
+amenakerbazm = 0;
+var obj = {
+    "xotbazm":[],
+    "xotakerbazm":[],
+    "gishatichbazm":[],
+    "amenakerbazm":[]
+}
+
 
 matrix = [];
 for (var y = 0; y < yqanak; y++) {
@@ -34,8 +47,8 @@ for (var y = 0; y < yqanak; y++) {
 //amenakeri stexcum
 var amenaker = 2;
 while (amenaker > 0) {
-    var x = Math.round(Math.random()*(xqanak - 1));
-    var y = Math.round(Math.random()*(yqanak - 1));
+    var x = Math.round(Math.random() * (xqanak - 1));
+    var y = Math.round(Math.random() * (yqanak - 1));
     if (matrix[y][x] == 0) {
         matrix[y][x] = 4;
         amenaker--;
@@ -45,8 +58,8 @@ while (amenaker > 0) {
 //mahi stexcum
 var mah = 1;
 while (mah > 0) {
-    var x = Math.round(Math.random()*(xqanak - 1));
-    var y = Math.round(Math.random()*(yqanak - 1));
+    var x = Math.round(Math.random() * (xqanak - 1));
+    var y = Math.round(Math.random() * (yqanak - 1));
     if (matrix[y][x] == 0) {
         matrix[y][x] = 5;
         mah--;
@@ -82,30 +95,75 @@ for (var y = 0; y < matrix.length; y++) {
     }
 }
 
-io.on('connection', function (socket) {
-    setInterval(func, 500);
-    function func() {
+num = 0;
+weather = 'garun';
+setInterval(func, 500);
+function func() {
+    num++;
+
+    if (num % 80 == 0) {
+        weather = 'garun';
+
+    }
+    else if (num % 80 == 20) {
+        weather = 'amar';
+
+    }
+    else if (num % 80 == 40) {
+        weather = 'ashun';
+
+    }
+    else if (num % 80 == 60) {
+        weather = 'dzmer';
+
+    }
+    console.log(weather);
+    if (weather == 'garun') {
+
+    }
+    if (weather != 'dzmer') {
         for (var i in grassArr) {
             grassArr[i].mul();
         }
-        for (var j in GrassEaterArr) {
-            GrassEaterArr[j].eat();
-        }
+    }
 
+    for (var j in GrassEaterArr) {
+        GrassEaterArr[j].eat();
+    }
+    if (weather != 'garun') {
         for (var j in gishatichArr) {
             gishatichArr[j].eat();
         }
+    }
+    if (weather = 'ashun') {
         for (var j in amenakerArr) {
             amenakerArr[j].move();
         }
-        for (var j in mahArr) {
-            mahArr[j].mernel();
-        }
-        io.sockets.emit('matrix', matrix);
-
     }
+    for (var j in mahArr) {
+        mahArr[j].mernel();
+        if (spanel) {
 
-});
+            io.sockets.emit('merannn');
+        }
+    }
+    var fs = require('fs');
+    var js = JSON.stringify(obj, null, " ");
+    if (num % 6 == 0) {
+        obj.xotbazm.push(xotbazm);
+        obj.xotakerbazm.push(xotakerbazm);
+        obj.gishatichbazm.push(gishatichbazm);
+        obj.amenakerbazm.push(amenakerbazm);
+        fs.writeFile("info.json".js);
+        console.log(obj);
+    }
+    io.sockets.emit('matrix', matrix);
+    io.sockets.emit('nerkir', weather);
+
+}
+
+io.on('connection', function (socket) { });
+
 
 
 
