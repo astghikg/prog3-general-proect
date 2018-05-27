@@ -1,4 +1,5 @@
 var express = require("express");
+var fs = require('fs');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -24,7 +25,7 @@ mahArr = [];
 var xqanak = 40;
 var yqanak = 40;
 spanel = false;
-xotbazm = 0;
+xotbazm1 = 0;
 xotakerbazm = 0;
 gishatichbazm = 0;
 amenakerbazm = 0;
@@ -117,10 +118,7 @@ function func() {
         weather = 'dzmer';
 
     }
-    console.log(weather);
-    if (weather == 'garun') {
-
-    }
+   
     if (weather != 'dzmer') {
         for (var i in grassArr) {
             grassArr[i].mul();
@@ -135,7 +133,7 @@ function func() {
             gishatichArr[j].eat();
         }
     }
-    if (weather = 'ashun') {
+    if (weather == 'ashun') {
         for (var j in amenakerArr) {
             amenakerArr[j].move();
         }
@@ -147,16 +145,17 @@ function func() {
             io.sockets.emit('merannn');
         }
     }
-    var fs = require('fs');
+    console.log(xotbazm1, weather, grassArr.length);
+    
     var js = JSON.stringify(obj, null, " ");
-    if (num % 6 == 0) {
-        obj.xotbazm.push(xotbazm);
-        obj.xotakerbazm.push(xotakerbazm);
-        obj.gishatichbazm.push(gishatichbazm);
-        obj.amenakerbazm.push(amenakerbazm);
-        fs.writeFile("info.json".js);
-        console.log(obj);
-    }
+    //if (num % 6 == 0) {
+        obj.xotbazm.push(xotbazm1);
+        // obj.xotakerbazm.push(xotakerbazm);
+        // obj.gishatichbazm.push(gishatichbazm);
+        // obj.amenakerbazm.push(amenakerbazm);
+        fs.writeFile("info.json", js);
+        //console.log(obj);
+    //}
     io.sockets.emit('matrix', matrix);
     io.sockets.emit('nerkir', weather);
 

@@ -52,7 +52,7 @@ var LivingCreature = require("./cnox.class");
         var vandak = this.chooseCell(1);
         var index = Math.floor(Math.random()*vandak.length);
         var mekvandak = vandak[index];
-        if (mekvandak) {
+        if (mekvandak && this.energy == 7) {
             var newX = mekvandak[0];
             var newY = mekvandak[1];
 
@@ -96,6 +96,8 @@ var LivingCreature = require("./cnox.class");
         var index = Math.floor(Math.random()*vandak.length);
         var mekvandak = vandak[index];
         if (mekvandak && this.energy >= 12) {
+            xotakerbazm++;
+            console.log(xotakerbazm);
             var newX = mekvandak[0];
             var newY = mekvandak[1];
             matrix[newY][newX] = this.index;

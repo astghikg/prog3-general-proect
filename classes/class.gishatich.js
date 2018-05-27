@@ -127,6 +127,7 @@ module.exports = class Gishatich {
         var index = Math.floor(Math.random()*vandak.length);
         var mekvandak = vandak[index];
         if (mekvandak) {
+            gishatichbazm++;
             var newX = mekvandak[0];
             var newY = mekvandak[1];
             matrix[newY][newX] = this.index;
